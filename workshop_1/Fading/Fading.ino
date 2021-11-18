@@ -9,6 +9,7 @@
 #define MIN_FADE_VALUE       0 
 #define MAX_FADE_VALUE       255  
 #define INCREMENT_STEP       5
+#define DELAY_STEP           30   // Milliseconds
 
 void setup() {
   // Nothing
@@ -17,16 +18,15 @@ void setup() {
 void loop() {
   // Fade in from min to max with a step of 5 points:
   for (int fadeValue = MIN_FADE_VALUE ; fadeValue <= MAX_FADE_VALUE; fadeValue += INCREMENT_STEP){
-    
     // Sets the value (range from 0 to 255):
     analogWrite(MY_LED_PIN, fadeValue);
     // Wait for 30 milliseconds to see the dimming effect
-    delay(30);
+    delay(DELAY_STEP);
   }
 
   // Fade out from max to min with a step of 5 points:
   for (int fadeValue = MIN_FADE_VALUE ; fadeValue <= MAX_FADE_VALUE; fadeValue -= INCREMENT_STEP){ 
     analogWrite(MY_LED_PIN, fadeValue);
-    delay(30);
+    delay(DELAY_STEP);
   }
 }

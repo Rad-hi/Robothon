@@ -1,10 +1,11 @@
 #include <SoftwareSerial.h>
 
 #define DEBUG_ENABLE // Comment this line before putting the code in the robot to remove serial printing
+
 #ifdef DEBUG_ENABLE
-  #define DEBUG_MACRO(STR) Serial.println(STR)
+  #define DEBUG_MACRO(STRING) Serial.println(STRING)
 #else
-  #define DEBUG_MACRO(STR) 
+  #define DEBUG_MACRO(STRING) // Nothing
 #endif
 
 /* Pin assignments */
@@ -23,7 +24,7 @@
 #define SLOW_MOTOR_SPEED      80
 
 // Software serial instance 
-SoftwareSerial mySerial(SERIAL_RX_PIN, SERIAL_TX_PIN); // RX_PIN, TX_PIN
+SoftwareSerial bluetoothSerial(SERIAL_RX_PIN, SERIAL_TX_PIN); // RX_PIN, TX_PIN
 char incomingData = 'r';
 
 /* Functions prototypes */
@@ -34,7 +35,7 @@ void left(uint8_t speed);
 void sharpRightTurn(uint8_t speed);
 void sharpLeftTurn(uint8_t speed);
 void stopBot(uint8_t speed);
-void scan();
+void scanBluetooth();
 
 /* ---------------------------------------------------------- */
 void setup() {
@@ -42,7 +43,7 @@ void setup() {
     Serial.begin(9600);
   #endif
   
-  mySerial.begin(9600); // This is the serial port we'll communicate with the bluetooth module through
+  bluetoothSerial.begin(9600); // This is the serial port we'll communicate with the bluetooth module through
   DEBUG_MACRO("--- Bluetooth RC robot started ---");
   
   pinMode(MOTOR_1_INPUT_1, OUTPUT);
@@ -54,11 +55,9 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  scan();
-  DEBUG_MACRO(incomingData); //This is used to visualize the recieved value in the serial monitor !
-
-  switch(incomingData){
+  scanBluetooth(); // Check if there's any incoming data through bluetooth
+  
+  switch(incomingData){ // Choose appropriate action
     case 'S': 
       stopBot(NORMAL_MOTOR_SPEED);
       DEBUG_MACRO("STOPPING");
@@ -161,7 +160,7 @@ void stopBot(uint8_t speed){
   digitalWrite(MOTOR_2_INPUT_2, LOW);
 }
 
-void scan(){
+void scanBluetooth(){
   // There's data in the serial buffer (available() returns the number of bytes available)
-  if(mySerial.available() > 0) incomingData = mySerial.read(); // Read a byte
+  if(bluetoothSerial.available() > 0) incomingData = bluetoothSerial.read(); // Read a byte
 }

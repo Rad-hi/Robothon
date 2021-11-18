@@ -1,7 +1,7 @@
 #define TRIG_PIN                    A3      // Wired to the sensor's trig and echo pins
 #define ECHO_PIN                    A4
 
-#define SPEED_OF_SOUND_IN_AIR       0.034f  // Speed of sound in Air in cm
+#define SPEED_OF_SOUND_IN_AIR       0.034f  // Speed of sound in Air in cm/s
 #define MAX_DISTANCE                200     // In centimeter .. Any value read beyond this, is considered as infinity
 
 // Variables to hold values for measuring the distance
