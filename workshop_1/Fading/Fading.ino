@@ -23,9 +23,8 @@ void loop() {
     // Wait for 30 milliseconds to see the dimming effect
     delay(DELAY_STEP);
   }
-
   // Fade out from max to min with a step of 5 points:
-  for (int fadeValue = MIN_FADE_VALUE ; fadeValue <= MAX_FADE_VALUE; fadeValue -= INCREMENT_STEP){ 
+  for (int fadeValue = MAX_FADE_VALUE ; fadeValue >= MIN_FADE_VALUE; fadeValue -= INCREMENT_STEP){ 
     analogWrite(MY_LED_PIN, fadeValue);
     delay(DELAY_STEP);
   }
