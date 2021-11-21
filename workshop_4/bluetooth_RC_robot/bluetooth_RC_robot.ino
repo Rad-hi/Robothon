@@ -15,8 +15,8 @@
 #define MOTOR_2_INPUT_1       9
 #define MOTOR_2_INPUT_2       10
 #define ENABLE_2_PIN          11
-#define SERIAL_RX_PIN         10
-#define SERIAL_TX_PIN         11
+#define SERIAL_RX_PIN         2
+#define SERIAL_TX_PIN         3
 
 /* Constants */
 #define MAX_MOTOR_SPEED       255
